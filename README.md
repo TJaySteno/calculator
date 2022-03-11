@@ -13,6 +13,14 @@ End of the day though, this is just meant as a fun, easy way to jump back into t
 
 ======
 
+### Constraints
+
+There is nothing to test whether inputs are String vs Number.
+
+======
+
 Start date: 3/10/22
 
-Improvements:
+~ Log ~
+3/10: Arithmetic done. Nothing to reject Strings currently. Next, exponents/radicals. I'd also like it to store the current calculation in addition to returning it.
+Future: Exp/rad, currentCalc, currentCalcString, CE, C, specials (e, pi), absolute, negate, equals, fact?, parenth, log, ln
