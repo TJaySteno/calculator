@@ -1,5 +1,5 @@
 const assert = require('assert');
-const calc = require('./app.js').calc;
+const calc = require('./calc.js').calc;
 
 console.log(calc);
 
@@ -42,12 +42,12 @@ describe('Arithmetic', function () {
       calc.value = 0;
     });
 
-    it('0 - 2 = -8', function () {
+    it('0 - 8 = -8', function () {
       calc.entry = 8;
       assert.equal(calc.sub(), -8);
     });
 
-    it('8 - -20 = 12', function () {
+    it('-8 - -20 = 12', function () {
       calc.entry = -20;
       assert.equal(calc.sub(), 12);
     });
@@ -140,12 +140,15 @@ describe('Arithmetic', function () {
       calc.value = 1;
       calc.clearEntry();
       assert.equal(calc.div(), Infinity);
-      calc.value = -2;
-      calc.clearEntry();
-      assert.equal(calc.div(), -Infinity);
       calc.value = 0.4;
       calc.clearEntry();
       assert.equal(calc.div(), Infinity);
+    });
+
+    it('-X / 0 = -Infinity', function () {
+      calc.value = -2;
+      calc.clearEntry();
+      assert.equal(calc.div(), -Infinity);
       calc.value = -0.9;
       calc.clearEntry();
       assert.equal(calc.div(), -Infinity);

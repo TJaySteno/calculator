@@ -9,6 +9,10 @@ exports.calc = {
   clearValue() {
     this.value = 0;
   },
+  clear() {
+    this.value = 0;
+    this.entry = 0;
+  },
 
   // Arithmetic
   add() {
