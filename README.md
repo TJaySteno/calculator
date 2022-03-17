@@ -24,3 +24,6 @@ Start date: 3/10/22
 ~ Log ~
 3/10: Arithmetic done. Nothing to reject Strings currently. Next, exponents/radicals. I'd also like it to store the current calculation in addition to returning it.
 Future: Exp/rad, currentCalc, currentCalcString, CE, C, specials (e, pi), absolute, negate, equals, fact?, parenth, log, ln
+
+3/16: Added value & entry storage, C & CE methods, and refactored arithmetic methods to accommodate.
+Future: Exp/rad, specials (e, pi), absolute, negate, equals, fact?, parenth, log, ln

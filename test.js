@@ -1,81 +1,154 @@
 const assert = require('assert');
 const calc = require('./app.js').calc;
 
+console.log(calc);
+
+describe('General', function () {
+  describe('.clearEntry()', function() {
+
+  });
+
+  describe('.clearValue()', function() {
+
+  });
+
+});
+
 describe('Arithmetic', function () {
 
   describe('.add()', function () {
-    it('2 + 2 = 4', function () {
-      assert.equal(calc.add(2,2), 4);
+    before(function () {
+      calc.value = 0;
     });
 
-    it('-2 + 2 = 0', function () {
-      assert.equal(calc.add(-2,2), 0);
+    it('0 + 2 = 2', function () {
+      calc.entry = 2;
+      assert.equal(calc.add(), 2);
+    });
+
+    it('2 + -4 = -2', function () {
+      calc.entry = -4;
+      assert.equal(calc.add(), -2);
+    });
+
+    it('-2 + 8 = 6', function () {
+      calc.entry = 8;
+      assert.equal(calc.add(), 6);
     });
   });
 
   describe('.sub()', function () {
-    it('2 - 2 = 0', function () {
-      assert.equal(calc.sub(2,2), 0);
+    before(function () {
+      calc.value = 0;
     });
 
-    it('22 - 2 = 20', function () {
-      assert.equal(calc.sub(22,2), 20);
+    it('0 - 2 = -8', function () {
+      calc.entry = 8;
+      assert.equal(calc.sub(), -8);
     });
 
-    it('-2 - 2 = 20', function () {
-      assert.equal(calc.sub(-2,2), -4);
+    it('8 - -20 = 12', function () {
+      calc.entry = -20;
+      assert.equal(calc.sub(), 12);
     });
 
-    it('2 - -2 = 20', function () {
-      assert.equal(calc.sub(2,-2), 4);
+    it('12 - 2 = 10', function () {
+      calc.entry = 2;
+      assert.equal(calc.sub(), 10);
     });
   });
 
   describe('.mult()', function () {
-    it('2 * 5 = 10', function () {
-      assert.equal(calc.mult(2,5), 10);
+    before(function () {
+      calc.value = 2;
     });
 
-    it('3 * 7 = 21', function () {
-      assert.equal(calc.mult(3,7), 21);
+    it('2 * 5 = 10', function () {
+      calc.entry = 5;
+      assert.equal(calc.mult(), 10);
+    });
+
+    it('10 * 1 = 10', function () {
+      calc.entry = 1;
+      assert.equal(calc.mult(), 10);
+    });
+
+    it('10 * .3 = 3', function () {
+      calc.entry = 0.3;
+      assert.equal(calc.mult(), 3);
     });
 
     it('X * 0 = 0', function () {
-      assert.equal(calc.mult(234,0), 0);
-      assert.equal(calc.mult(2,0), 0);
-      assert.equal(calc.mult(76324235,0), 0);
+      calc.value = 234;
+      calc.clearEntry();
+      assert.equal(calc.mult(), 0);
+      calc.value = 2;
+      calc.clearEntry();
+      assert.equal(calc.mult(), 0);
+      calc.value = 76324235;
+      calc.clearEntry();
+      assert.equal(calc.mult(), 0);
     });
 
     it('0 * X = 0', function () {
-      assert.equal(calc.mult(0,1354124), 0);
-      assert.equal(calc.mult(0,323), 0);
-      assert.equal(calc.mult(0,5342623), 0);
+      calc.clearValue();
+      calc.entry = 463;
+      assert.equal(calc.mult(), 0);
+      calc.clearValue();
+      calc.entry = -43;
+      assert.equal(calc.mult(), 0);
+      calc.clearValue();
+      calc.entry = 0.3;
+      assert.equal(calc.mult(), 0);
+      calc.clearValue();
+      calc.entry = -0.3;
+      assert.equal(calc.mult(), 0);
     });
   });
 
   describe('.div()', function () {
-    it('1 / 2 = .5', function () {
-      assert.equal(calc.div(1,2), 0.5);
+    before(function () {
+      calc.value = 2;
     });
 
-    it('6 / 2 = 3', function () {
-      assert.equal(calc.div(6,2), 3);
+    it('2 / 1 = 2', function () {
+      calc.entry = 1;
+      assert.equal(calc.div(), 2);
+    });
+
+    it('2 / 4 = .5', function () {
+      calc.entry = 4;
+      assert.equal(calc.div(), 0.5);
     });
 
     it('0 / X = 0', function () {
-      assert.equal(calc.div(0,1235132), 0);
-      assert.equal(calc.div(0,347), 0);
-      assert.equal(calc.div(0,-72), 0);
-      assert.equal(calc.div(0,0.2), 0);
+      calc.clearValue();
+      calc.entry = 0.2;
+      assert.equal(calc.div(), 0);
+      calc.clearValue();
+      calc.entry = 1;
+      assert.equal(calc.div(), 0);
+      calc.clearValue();
+      calc.entry = -24;
+      assert.equal(calc.div(), 0);
+      calc.clearValue();
+      calc.entry = 412;
+      assert.equal(calc.div(), 0);
     });
 
     it('X / 0 = Infinity', function () {
-      assert.equal(calc.div(1325123512,0), Infinity);
-      assert.equal(calc.div(1,0), Infinity);
-      assert.equal(calc.div(-2,0), -Infinity);
-      assert.equal(calc.div(0.4,0), Infinity);
-      assert.equal(calc.div(4212,0), Infinity);
-      assert.equal(calc.div(1241245125,0), Infinity);
+      calc.value = 1;
+      calc.clearEntry();
+      assert.equal(calc.div(), Infinity);
+      calc.value = -2;
+      calc.clearEntry();
+      assert.equal(calc.div(), -Infinity);
+      calc.value = 0.4;
+      calc.clearEntry();
+      assert.equal(calc.div(), Infinity);
+      calc.value = -0.9;
+      calc.clearEntry();
+      assert.equal(calc.div(), -Infinity);
     });
   });
 });
